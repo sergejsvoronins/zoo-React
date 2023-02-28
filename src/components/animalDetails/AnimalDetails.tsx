@@ -6,39 +6,33 @@ import { getAnimalById } from "../../services/zooService";
 
 
 export const AnimalDetails = () => {
-    const [animal, setAnimal] = useState<IAnimalInfo>();
     const { id } = useParams();
-    const { animals, updateAnimalList } = useOutletContext<IAnimalSmallContext>();
+    const { animals, updateFeedTime } = useOutletContext<IAnimalSmallContext>();
 
-    useEffect(()=>{
-        const getData = async () => {
-            if(id) {
-                let response = await getAnimalById(id);
-                setAnimal(response);
+
+    const handleClick = (animal:IAnimalInfo) => {
+        updateFeedTime(animal);
+    }
+    let animalDetailHtml = animals.map((item)=>{
+        if(id){
+            if(+id===item.id){
+                return (
+                    <div key={item.id}>
+                        <div>
+                            <img src={item.imageUrl} alt={item.name} />
+                        </div>
+                        <h3>{item.name}</h3>
+                        <p>{item.longDescription}</p>
+                        <p>Födelseår: {item.yearOfBirth}</p>
+                        <p>Sista matning: {item.lastFed}</p>
+                        <button onClick={()=>{handleClick(item)}}>Mata djuren</button>
+                    </div>
+                )
             }
         }
-        if(animal) return;
-        getData();
     })
-    const handleClick = () => {
-        if(animal) {
-            setAnimal({...animal,lastFed:Date()});
-            updateAnimalList(animal);
-        }
-        console.log(animal)
-    }
-    let animalDetailHtml = 
-        <div>
-            <div>
-                <img src={animal?.imageUrl} alt={animal?.name} />
-            </div>
-            <h3>{animal?.name}</h3>
-            <p>{animal?.longDescription}</p>
-            <p>Födelseår: {animal?.yearOfBirth}</p>
-            <p>Sista matning: {animal?.lastFed}</p>
-            <button onClick={handleClick}>Mata djuren</button>
-        </div>
+
         
 
-    return <>{animalDetailHtml}</>
+    return (<>{animalDetailHtml}</>)
 }

@@ -8,7 +8,7 @@ import { getAnimals } from './services/zooService';
 
 export interface IAnimalSmallContext {
   animals: IAnimalInfo [];
-  updateAnimalList(animal: IAnimalInfo):void;
+  updateFeedTime(animal: IAnimalInfo):void;
 }
 function App() {
   const [animals, setAnimals] = useState<IAnimalInfo[]>([]);
@@ -30,17 +30,17 @@ function App() {
       }
       
   })
-  const updateAnimalList = (animal:IAnimalInfo) => {
-    let updatedList = animals.map((item)=>animal.id===item.id ? animal : item);
-    setAnimals(updatedList);
-    console.log(animals);
+
+  const updateFeedTime = (animal:IAnimalInfo) => {
+    let updatetdList = animals.map((item)=>animal.id===item.id ? {...item, lastFed: Date(), isFed:true}: item);
+    setAnimals(updatetdList);
   }
   console.log(animals);
   return (
   <>
       <header>Header</header>
       <main className="main">
-          <Outlet context = {{animals, updateAnimalList}} />
+          <Outlet context = {{animals, updateFeedTime}} />
       </main>
       <footer>Footer</footer>
   </>
