@@ -16,6 +16,7 @@ export const AnimalSmall = () => {
             <div key= {animal.id} className="main__animalContainer" onClick={()=>{handleClick(animal)}}>
                 <div>
                     <img src={animal.imageUrl} alt={animal.name} />
+                    {animal.isFed ? <span>Mätt</span> : <span className="isHungry">Hungrig</span>}
                 </div>
                 <h3>{animal.name}</h3>
                 <p>{animal.shortDescription}</p>

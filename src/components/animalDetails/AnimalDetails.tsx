@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom"
 import { IAnimalSmallContext } from "../../App";
 import { IAnimalInfo } from "../../models/IAnimalInfo";
-import { getAnimalById } from "../../services/zooService";
+import "./AnimalDetails.scss";
 
 
 export const AnimalDetails = () => {
@@ -17,15 +17,15 @@ export const AnimalDetails = () => {
         if(id){
             if(+id===item.id){
                 return (
-                    <div key={item.id}>
-                        <div>
+                    <div className="main__animalInfo" key={item.id}>
+                        <div className="main__animalInfo__img">
                             <img src={item.imageUrl} alt={item.name} />
+                            <button disabled={item.isFed} onClick={()=>{handleClick(item)}}>Mata</button>
                         </div>
                         <h3>{item.name}</h3>
                         <p>{item.longDescription}</p>
                         <p>Födelseår: {item.yearOfBirth}</p>
                         <p>Sista matning: {item.lastFed}</p>
-                        <button onClick={()=>{handleClick(item)}}>Mata djuren</button>
                     </div>
                 )
             }
