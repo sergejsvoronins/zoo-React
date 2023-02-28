@@ -1,0 +1,15 @@
+.main {
+    &__animalContainer{
+        background-color: #fff;
+        padding: 1rem;
+        div {
+            width: 100%;
+            img {
+                width: 100%;
+            }
+        }
+        h3 {
+            text-align: center;
+        }
+    }
+}
