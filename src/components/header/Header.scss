@@ -1,11 +1,14 @@
-.header {
+header {
+    box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.9);
+   .header {
     text-align: center;
     background-color: green;
-    box-shadow: 0 0 10px rgba($color: #000000, $alpha: .3);
     h1 {
         margin: 0;
         padding: 1rem;
         color: yellow;
         font-size: 30px;
     }
+} 
 }
+

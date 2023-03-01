@@ -1,40 +1,88 @@
 .main {
+    padding: 1rem;
     &__animalInfo {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
         padding: 0 1rem;
-
-        &__img {
-            width: 50%;
+        box-shadow: 0 0 5px rgba($color: #000000, $alpha: .3);
+        background-color: #fff;
+        &__header {
+            justify-content: center;
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
             text-align: center;
             position: relative;
-            min-height: 200px;
-            img {
+            h3 {
                 width: 100%;
+            }
+            span {
+                width: 100%;
+                font-weight: 700;
             }
             button {
                 position: absolute;
-                bottom: 1rem;
-                left: 1rem;
-                height: 75px;
-                width: 75px;
-                border-radius: 50%;
+                left: 0;
+                top: 1rem;
                 border: none;
-                background-color: red;
+                border-radius: 2px;
                 box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.3);
+                background-color: #fff;
+                padding: 0.3rem;
                 &:hover {
-                    background-color: rgb(231, 1, 1);
                     transform: scale(1.02);
                 }
                 &:active {
                     transform: scale(1);
                 }
             }
-            
         }
-        h3 {
-            text-align: center;
+        &__img {
+            width: calc(50% - 2rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            padding: 1rem;
+            gap: 1rem;
+
+            img {
+                width: 100%;
+                min-height: 100px;
+
+            }     
+            button {
+                width: 50%;
+                border: none;
+                padding: 1rem 0;
+                border-radius: 2px;
+                box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.3);
+
+            }
+            .isHungry {
+                background-color: red;
+                &:hover {
+                    transform: scale(1.02);
+                }
+                &:active {
+                    transform: scale(1);
+                }
+            } 
+            .notHungry {
+                background-color: greenyellow;
+            }
+        }
+        &__info {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: calc(50% - 2rem);
+            justify-content: start;
+            padding: 1rem;
+        }
+        p {
+            font-size: 10px;
         }
 
     }

@@ -6,6 +6,7 @@ export interface IAnimalInfo {
     longDescription:string,
     medicine: string,
     name: string,
+    latinName: string,
     shortDescription: string,
     yearOfBirth: number,
 }

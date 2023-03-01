@@ -4,16 +4,21 @@
     flex-wrap: wrap;
     gap: 0.7rem;
     justify-content: space-around;
-    padding: 1rem 0;
+    padding: 1rem;
     @keyframes giveMeTheFood {
         from {
             transform: scale(0.9);
+            left: 50%;
+            transform: translateX(-50%);
         }
         to {
             transform: scale(1.2);
+            left: 50%;
+            transform: translateX(-50%);
         }
     }
     &__animalContainer{
+        background-color: #fff;
         padding: 0.7rem;
         width: 30%;
         min-width: 200px;

@@ -13,23 +13,25 @@ export interface IAnimalSmallContext {
 }
 function App() {
   const [animals, setAnimals] = useState<IAnimalInfo[]>([]);
-  const [isLoadingFromApi, setIsLoadingFromApi] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [timeToEat, setTimeToEat] = useState<Date>();
   useEffect(()=>{
-      const getTheZoo = async () => {
-          let animals = await getAnimals();
-          setAnimals(animals);
-          setIsLoadingFromApi(true);
-      }
-      // let getFromLocalStorage : string | null =localStorage.getItem("animals");
-      if(isLoadingFromApi){
-          localStorage.setItem("animals", JSON.stringify(animals));
-          return;
-      }
-      else {
-        getTheZoo();
-      }
-      
+    const getTheZoo = async () => {
+      let animals = await getAnimals();
+      setAnimals(animals);
+      setIsLoading(true);
+    }
+    let dataFromLS = localStorage.getItem("animals");
+    if(dataFromLS && !isLoading){
+      setAnimals(JSON.parse(dataFromLS));
+      setIsLoading(true);
+      return
+    }
+    else {
+      if(!isLoading)
+      getTheZoo();
+    }
+    localStorage.setItem("animals", JSON.stringify(animals));
   })
   // useEffect(()=>{
   //   let date = new Date();
