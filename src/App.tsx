@@ -14,7 +14,7 @@ export interface IAnimalSmallContext {
 function App() {
   const [animals, setAnimals] = useState<IAnimalInfo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [timeToEat, setTimeToEat] = useState<Date>();
+  // const [timeToEat, setTimeToEat] = useState<Date>();
   useEffect(()=>{
     const getTheZoo = async () => {
       let animals = await getAnimals();
@@ -25,7 +25,7 @@ function App() {
     if(dataFromLS && !isLoading){
       setAnimals(JSON.parse(dataFromLS));
       setIsLoading(true);
-      return
+      return;
     }
     else {
       if(!isLoading)

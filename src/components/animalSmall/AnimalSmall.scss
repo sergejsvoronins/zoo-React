@@ -7,14 +7,10 @@
     padding: 1rem;
     @keyframes giveMeTheFood {
         from {
-            transform: scale(0.9);
-            left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) scale(0.9);
         }
         to {
-            transform: scale(1.2);
-            left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) scale(1.2);
         }
     }
     &__animalContainer{

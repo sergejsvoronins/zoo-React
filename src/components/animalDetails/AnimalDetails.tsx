@@ -29,8 +29,8 @@ export const AnimalDetails = () => {
                         <div className="main__animalInfo__img">
                             <img src={item.imageUrl} alt={item.name} />
                             {item.isFed ? 
-                            <button className="notHungry" disabled={item.isFed} onClick={()=>{handleClick(item)}}>Djuren är mätt</button>:
-                            <button className="isHungry"  onClick={()=>{handleClick(item)}}>Mata djuren</button>}
+                            <button className="notHungry" disabled={item.isFed} onClick={()=>{handleClick(item)}}>Djuret är mätt</button>:
+                            <button className="isHungry"  onClick={()=>{handleClick(item)}}>Mata djuret</button>}
                         </div>
                         <div className="main__animalInfo__info">
                             <p>{item.longDescription}</p>
