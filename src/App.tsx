@@ -10,11 +10,13 @@ import { getAnimals } from './services/zooService';
 export interface IAnimalSmallContext {
   animals: IAnimalInfo [];
   updateFeedTime(animal: IAnimalInfo):void;
+  changeStatus(animal: IAnimalInfo):void;
 }
 function App() {
   const [animals, setAnimals] = useState<IAnimalInfo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const [timeToEat, setTimeToEat] = useState<Date>();
+
+
   useEffect(()=>{
     const getTheZoo = async () => {
       let animals = await getAnimals();
@@ -23,7 +25,9 @@ function App() {
     }
     let dataFromLS = localStorage.getItem("animals");
     if(dataFromLS && !isLoading){
-      setAnimals(JSON.parse(dataFromLS));
+      let response : IAnimalInfo [] = JSON.parse(dataFromLS);
+
+      setAnimals(response);
       setIsLoading(true);
       return;
     }
@@ -33,24 +37,22 @@ function App() {
     }
     localStorage.setItem("animals", JSON.stringify(animals));
   })
-  // useEffect(()=>{
-  //   let date = new Date();
-  //   setTimeToEat(date);
-  // })
 
   const updateFeedTime = (animal:IAnimalInfo) => {
-    let date = new Date;
-    let curTime = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
-    let updatetdList = animals.map((item)=>animal.id===item.id ? {...item, lastFed: curTime, isFed:true}: item);
+    let date = new Date();
+    let updatetdList = animals.map((item)=>animal.id===item.id ? {...item, lastFed: date.toLocaleString(), isFed:true, lastFedSeconds: date.getSeconds()}: item);
     setAnimals(updatetdList);
-    console.log(date.toLocaleString())
+  }
+  const changeStatus = (animal:IAnimalInfo) => {
+    let updatetdList = animals.map((item)=>animal.id===item.id ? {...item,isFed:false}: item);
+    setAnimals(updatetdList);
   }
   console.log(animals);
   return (
   <>
       <header><Header /></header>
       <main className="main">
-          <Outlet context = {{animals, updateFeedTime}} />
+          <Outlet context = {{animals, updateFeedTime, changeStatus}} />
       </main>
   </>
   )

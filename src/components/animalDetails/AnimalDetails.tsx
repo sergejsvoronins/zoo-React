@@ -7,8 +7,20 @@ import "./AnimalDetails.scss";
 
 export const AnimalDetails = () => {
     const { id } = useParams();
-    const { animals, updateFeedTime } = useOutletContext<IAnimalSmallContext>();
+    const { animals, updateFeedTime , changeStatus} = useOutletContext<IAnimalSmallContext>();
+    const [curTime, setCurTime] = useState<number>(0);
 
+    useEffect(()=>{
+        let current = new Date().getHours();
+        (current<3) ? setCurTime(current+24) : setCurTime(current);
+        animals.map((animal)=>{
+            if(id && +id===animal.id && animal.isFed){
+                if(((curTime-animal.lastFedHours)>=3)){
+                    changeStatus(animal);
+                }       
+            }
+        })
+    })
     const navigate = useNavigate();
     const handleClick = (animal:IAnimalInfo) => {
         updateFeedTime(animal);
@@ -16,6 +28,7 @@ export const AnimalDetails = () => {
     const handleClickBack = () => {
         navigate("/");
     }
+
     let animalDetailHtml = animals.map((item)=>{
         if(id){
             if(+id===item.id){
@@ -45,7 +58,6 @@ export const AnimalDetails = () => {
         }
     })
 
-        
 
     return (<>{animalDetailHtml}</>)
 }
