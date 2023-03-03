@@ -2,7 +2,7 @@ import "./Header.scss";
 export const Header = () => {
     return (
         <section className="header">
-            <h1>ZooApp</h1>
+            <h1>Feed The Zoo</h1>
         </section>
     )
 }

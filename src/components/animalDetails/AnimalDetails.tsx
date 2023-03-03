@@ -5,22 +5,24 @@ import "./AnimalDetails.scss";
 import { MdFastfood } from 'react-icons/md';
 import { IAnimalContext } from "../../models/IAnimalContext";
 
-
 export const AnimalDetails = () => {
     const { id } = useParams();
     const { animals, updateFeedTime , changeStatus} = useOutletContext<IAnimalContext>();
     const [curTime, setCurTime] = useState<number>(0);
-
+    const [isChecked, setIsChecked] = useState<boolean>(false);
     useEffect(()=>{
-        let current = new Date().getTime();
-        setCurTime(current/(1000*60*60));
-        animals.map((animal)=>{
-            if(animal.isFed && animal.lastFedHours){
-                if((curTime-animal.lastFedHours)>3){
-                    changeStatus(animal);
+        if(!isChecked){
+            let current = new Date().getTime();
+            setCurTime(current/(1000*60*60));
+            animals.map((animal)=>{
+                if(id && +id===animal.id && animal.isFed && animal.lastFedHours){
+                    if((curTime-animal.lastFedHours)>3){
+                        changeStatus(animal);
+                    }
                 }
-            }
-        })
+                setIsChecked(true);
+            })
+        }
     })
     const navigate = useNavigate();
     const handleClick = (animal:IAnimalInfo) => {
@@ -29,7 +31,6 @@ export const AnimalDetails = () => {
     const handleClickBack = () => {
         navigate("/");
     }
-    console.log(curTime);
     let animalDetailHtml = animals.map((item)=>{
         if(id){
             if(+id===item.id){
@@ -52,7 +53,7 @@ export const AnimalDetails = () => {
                         <div className="main__animalInfo__btn">
                             {item.isFed ? 
                             <button className="notHungry" disabled={item.isFed} onClick={()=>{handleClick(item)}}>Mätt</button>:
-                            <button className="isHungry"  onClick={()=>{handleClick(item)}}><MdFastfood /></button>}  
+                            <button className="isHungry"  onClick={()=>{handleClick(item)}}>Ge mig: <MdFastfood /></button>}  
                         </div>
                     </div>
                 )
