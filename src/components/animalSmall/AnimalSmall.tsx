@@ -8,7 +8,7 @@ import { IAnimalContext } from "../../models/IAnimalContext";
 
 
 export const AnimalSmall = () => {
-    const {animals, changeStatus } = useOutletContext<IAnimalContext>();
+    const {animals, changeStatus, feedIntervalInSec } = useOutletContext<IAnimalContext>();
 
 
     useEffect(()=>{
@@ -16,7 +16,7 @@ export const AnimalSmall = () => {
             let sec = current/1000;
             animals.map((animal)=>{
                 if(animal.isFed && animal.lastFedSec){
-                    if((sec-animal.lastFedSec)>10){
+                    if((sec-animal.lastFedSec)>feedIntervalInSec){
                         changeStatus(animal);  
                     }
                 }
