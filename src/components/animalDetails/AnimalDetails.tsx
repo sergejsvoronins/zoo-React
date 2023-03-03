@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom"
-import { IAnimalSmallContext } from "../../App";
 import { IAnimalInfo } from "../../models/IAnimalInfo";
 import "./AnimalDetails.scss";
+import { MdFastfood } from 'react-icons/md';
+import { IAnimalContext } from "../../models/IAnimalContext";
 
 
 export const AnimalDetails = () => {
     const { id } = useParams();
-    const { animals, updateFeedTime , changeStatus} = useOutletContext<IAnimalSmallContext>();
+    const { animals, updateFeedTime , changeStatus} = useOutletContext<IAnimalContext>();
     const [curTime, setCurTime] = useState<number>(0);
 
     useEffect(()=>{
@@ -39,11 +40,8 @@ export const AnimalDetails = () => {
                             <span>Sista matning: {item.lastFed}</span>
                             <button onClick={handleClickBack}>Tillbaka</button>
                         </div>
-                        <div className="main__animalInfo__img">
+                        <div className="main__animalInfo__img">  
                             <img src={item.imageUrl} alt={item.name} />
-                            {item.isFed ? 
-                            <button className="notHungry" disabled={item.isFed} onClick={()=>{handleClick(item)}}>Djuret är mätt</button>:
-                            <button className="isHungry"  onClick={()=>{handleClick(item)}}>Mata djuret</button>}
                         </div>
                         <div className="main__animalInfo__info">
                             <p>{item.longDescription}</p>
@@ -51,7 +49,11 @@ export const AnimalDetails = () => {
                             <p>Latinskt namn: {item.latinName}</p>
                             <p>Födelseår: {item.yearOfBirth}</p>
                         </div>
-
+                        <div className="main__animalInfo__btn">
+                            {item.isFed ? 
+                            <button className="notHungry" disabled={item.isFed} onClick={()=>{handleClick(item)}}>Mätt</button>:
+                            <button className="isHungry"  onClick={()=>{handleClick(item)}}><MdFastfood /></button>}  
+                        </div>
                     </div>
                 )
             }
