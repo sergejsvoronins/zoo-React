@@ -43,7 +43,9 @@ function App() {
 
   const updateFeedTime = (animal:IAnimalInfo) => {
     let date = new Date();
-    let updatetdList = animals.map((item)=>animal.id===item.id ? {...item, lastFed: date.toLocaleString(), isFed:true, lastFedHours: date.getHours()}: item);
+    let toLocaleString = date.toLocaleString();
+    let seconds = date.getTime()/1000;
+    let updatetdList = animals.map((item)=>animal.id===item.id ? {...item, lastFed: toLocaleString, isFed:true, lastFedSec: seconds}: item);
     setAnimals(updatetdList);
   }
   const changeStatus = (animal:IAnimalInfo) => {

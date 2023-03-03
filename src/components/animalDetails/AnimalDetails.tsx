@@ -12,13 +12,13 @@ export const AnimalDetails = () => {
     const [curTime, setCurTime] = useState<number>(0);
 
     useEffect(()=>{
-        let current = new Date().getHours();
-        (current<3) ? setCurTime(current+24) : setCurTime(current);
+        let current = new Date().getTime();
+        setCurTime(current/1000);
         animals.map((animal)=>{
-            if(id && +id===animal.id && animal.isFed && animal.lastFedHours){
-                if(((curTime-animal.lastFedHours)>=3)){
+            if(id && +id===animal.id && animal.isFed && animal.lastFedSec){
+                if((curTime-animal.lastFedSec)>10){
                     changeStatus(animal);
-                }       
+                }
             }
         })
     })
@@ -29,7 +29,6 @@ export const AnimalDetails = () => {
     const handleClickBack = () => {
         navigate("/");
     }
-
     let animalDetailHtml = animals.map((item)=>{
         if(id){
             if(+id===item.id){

@@ -11,13 +11,13 @@ export const AnimalSmall = () => {
     const {animals, changeStatus } = useOutletContext<IAnimalContext>();
     const [curTime, setCurTime] = useState<number>(0);
     useEffect(()=>{
-        let current = new Date().getHours();
-        (current<3) ? setCurTime(current+24) : setCurTime(current);
+        let current = new Date().getTime();
+        setCurTime(current/1000);
         animals.map((animal)=>{
-            if(animal.isFed && animal.lastFedHours){
-                if(((curTime-animal.lastFedHours)>=3)){
+            if(animal.isFed && animal.lastFedSec){
+                if((curTime-animal.lastFedSec)>10){
                     changeStatus(animal);
-                }       
+                }
             }
         })
     })
