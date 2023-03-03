@@ -4,4 +4,5 @@ export interface IAnimalContext {
     animals: IAnimalInfo [];
     updateFeedTime(animal: IAnimalInfo):void;
     changeStatus(animal: IAnimalInfo):void;
+    feedIntervalInHours: number;
   }

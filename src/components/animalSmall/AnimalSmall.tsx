@@ -8,14 +8,14 @@ import { IAnimalContext } from "../../models/IAnimalContext";
 
 
 export const AnimalSmall = () => {
-    const {animals, changeStatus } = useOutletContext<IAnimalContext>();
+    const {animals, changeStatus, feedIntervalInHours } = useOutletContext<IAnimalContext>();
 
     useEffect(()=>{
             let current = new Date().getTime();
             let hours = current/(1000*60*60);
             animals.map((animal)=>{
                 if(animal.isFed && animal.lastFedHours){
-                    if((hours-animal.lastFedHours)>=3){
+                    if((hours-animal.lastFedHours)>=feedIntervalInHours){
                         changeStatus(animal);
                     }
                 }

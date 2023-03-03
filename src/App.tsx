@@ -13,7 +13,7 @@ function App() {
   const [animals, setAnimals] = useState<IAnimalInfo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>();
-
+  const feedIntervalInHours : number = 3;
   useEffect(()=>{
     const getTheZoo = async () => {
       let response = await getAnimals();
@@ -56,7 +56,7 @@ function App() {
     <>
       <header><Header /></header>
       <main className="main">
-      <Outlet context = {{animals, updateFeedTime, changeStatus}} />
+      <Outlet context = {{animals, updateFeedTime, changeStatus, feedIntervalInHours}} />
       </main>
     </>
   return (
