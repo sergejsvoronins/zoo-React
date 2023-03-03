@@ -16,7 +16,7 @@ export const AnimalDetails = () => {
             let sec = current/1000;
             animals.map((animal)=>{
                 if(id && +id===animal.id && animal.isFed && animal.lastFedSec){
-                    if((sec-animal.lastFedSec)>60){
+                    if((sec-animal.lastFedSec)>10){
                         changeStatus(animal);  
                     }
                 }
