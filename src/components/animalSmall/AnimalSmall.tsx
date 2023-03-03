@@ -9,22 +9,18 @@ import { IAnimalContext } from "../../models/IAnimalContext";
 
 export const AnimalSmall = () => {
     const {animals, changeStatus } = useOutletContext<IAnimalContext>();
-    const [curTime, setCurTime] = useState<number>(0);
-    const [isChecked, setIsChecked] = useState<boolean>(false);
+
     useEffect(()=>{
-        if(!isChecked){
             let current = new Date().getTime();
-            setCurTime(current/(1000*60*60));
+            let hours = current/(1000*60*60);
             animals.map((animal)=>{
                 if(animal.isFed && animal.lastFedHours){
-                    if((curTime-animal.lastFedHours)>3){
+                    if((hours-animal.lastFedHours)>=3){
                         changeStatus(animal);
                     }
                 }
-                setIsChecked(true);
             })
-        }
-    })
+    }, [animals])
     let navigate = useNavigate();
     const handleClick = (animal: IAnimalInfo) => {
         navigate(`/${animal.id}`)
