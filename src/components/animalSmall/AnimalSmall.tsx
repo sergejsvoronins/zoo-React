@@ -19,7 +19,7 @@ export const AnimalSmall = () => {
                         changeStatus(animal);
                     }
                 }
-            })
+            })  
     }, [animals])
     let navigate = useNavigate();
     const handleClick = (animal: IAnimalInfo) => {
