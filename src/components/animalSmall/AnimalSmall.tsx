@@ -14,7 +14,7 @@ export const AnimalSmall = () => {
         let current = new Date().getHours();
         (current<3) ? setCurTime(current+24) : setCurTime(current);
         animals.map((animal)=>{
-            if(animal.isFed){
+            if(animal.isFed && animal.lastFedHours){
                 if(((curTime-animal.lastFedHours)>=3)){
                     changeStatus(animal);
                 }       
