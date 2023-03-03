@@ -10,17 +10,22 @@ export const AnimalDetails = () => {
     const { id } = useParams();
     const { animals, updateFeedTime , changeStatus} = useOutletContext<IAnimalContext>();
     const [curTime, setCurTime] = useState<number>(0);
+    const [isChecked, setIsChecked] = useState<boolean>(false);
 
     useEffect(()=>{
-        let current = new Date().getTime();
-        setCurTime(current/1000);
-        animals.map((animal)=>{
-            if(id && +id===animal.id && animal.isFed && animal.lastFedSec){
-                if((curTime-animal.lastFedSec)>10){
-                    changeStatus(animal);
+        if(!isChecked){
+            let current = new Date().getTime();
+            setCurTime(current/1000);
+            animals.map((animal)=>{
+                if(id && +id===animal.id && animal.isFed && animal.lastFedSec){
+                    if((curTime-animal.lastFedSec)>10){
+                        changeStatus(animal);  
+                    }
                 }
-            }
-        })
+                setIsChecked(true);
+            })
+            
+        }
     })
     const navigate = useNavigate();
     const handleClick = (animal:IAnimalInfo) => {
@@ -29,6 +34,8 @@ export const AnimalDetails = () => {
     const handleClickBack = () => {
         navigate("/");
     }
+    console.log(isChecked);
+    
     let animalDetailHtml = animals.map((item)=>{
         if(id){
             if(+id===item.id){
