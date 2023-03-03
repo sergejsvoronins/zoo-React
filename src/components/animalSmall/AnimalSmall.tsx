@@ -12,10 +12,10 @@ export const AnimalSmall = () => {
     const [curTime, setCurTime] = useState<number>(0);
     useEffect(()=>{
         let current = new Date().getTime();
-        setCurTime(current/1000);
+        setCurTime(current/(1000*60*60));
         animals.map((animal)=>{
-            if(animal.isFed && animal.lastFedSec){
-                if((curTime-animal.lastFedSec)>10){
+            if(animal.isFed && animal.lastFedHours){
+                if((curTime-animal.lastFedHours)>3){
                     changeStatus(animal);
                 }
             }
@@ -25,6 +25,8 @@ export const AnimalSmall = () => {
     const handleClick = (animal: IAnimalInfo) => {
         navigate(`/${animal.id}`)
     }
+
+    
     let animalsHtml = animals.map((animal) => {
         return (
             <div key= {animal.id} className="main__animalContainer" onClick={()=>{handleClick(animal)}}>

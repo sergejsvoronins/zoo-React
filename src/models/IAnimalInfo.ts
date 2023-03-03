@@ -9,5 +9,5 @@ export interface IAnimalInfo {
     latinName: string,
     shortDescription: string,
     yearOfBirth: number,
-    lastFedSec?: number
+    lastFedHours: number
 }
